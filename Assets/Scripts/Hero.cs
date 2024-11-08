@@ -246,6 +246,11 @@ public class Hero : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
+    public void Restart3()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Level3");
+    }
 
 }
 
