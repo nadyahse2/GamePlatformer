@@ -2438,7 +2438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SFX: {fileID: 73253305}
   Music: {fileID: 1200954224}
-  Sound: {fileID: 8300000, guid: 17ae379c99ee78e42b30cd3e5ae406ca, type: 3}
+  Sound: {fileID: 8300000, guid: b448f96e07bfe4a45b88e4a9e88812cf, type: 3}
   ClickButton: {fileID: 8300000, guid: 3f30d151666a558498615a125956e438, type: 3}
 --- !u!4 &2136384850
 Transform:
