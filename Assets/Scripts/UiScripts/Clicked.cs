@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Clicked : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class Clicked : MonoBehaviour
     public AudioClip OnClicked;
 
     private string NextScene;
+    public GameObject player;
+    int count_levels = 5;
+
+    
     public void OnCliked(string Name)
     {
         Sound.clip = OnClicked;
@@ -14,7 +19,7 @@ public class Clicked : MonoBehaviour
         Time.timeScale = 1f;
         if (Name != "")
         {
-            Invoke("LoadNextScene", OnClicked.length * 2);
+            Invoke("LoadNextScene", OnClicked.length * 1);
             NextScene = Name;
         }
     }
@@ -35,6 +40,15 @@ public class Clicked : MonoBehaviour
 
     public void OpenMenu()
     {
+        Vector3 pos = player.transform.position;
+        int ind_scene = SceneManager.GetActiveScene().buildIndex;
+        string Posx = "PosX"+ind_scene;
+        string Posy = "PosY" + ind_scene;
+        string Posz = "PosZ" + ind_scene;
+        PlayerPrefs.SetFloat(Posx, pos.x);
+        PlayerPrefs.SetFloat(Posy, pos.y);
+        PlayerPrefs.SetFloat(Posz, pos.z);
+        Debug.Log(Posz);
         Sound.clip = OnClicked;
         Sound.Play();
         PausePanel.SetActive(true);
@@ -60,5 +74,15 @@ public class Clicked : MonoBehaviour
         PausePanel.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("Levels");
+    }
+    public void QuitGame()
+    {
+         PlayerPrefs.DeleteAll();
+         #if UNITY_EDITOR
+                  UnityEditor.EditorApplication.isPlaying= false;
+         #else 
+                  Application.Quit();
+         #endif
+             
     }
 }

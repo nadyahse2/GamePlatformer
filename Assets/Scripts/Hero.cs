@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
-    [SerializeField] private float speed = 4f;
-    [SerializeField] private float jump_force = 20f;
-    [SerializeField] private int lives = 3;
-    [SerializeField] private int coins = 0;
+    private float speed = 5f;
+    private float jump_force = 20f;
+    private int lives = 3;
+    private int coins = 0;
 
     private Rigidbody2D rd;
     private Animator anim;
@@ -25,6 +25,7 @@ public class Hero : MonoBehaviour
     public Image[] hearts;
     public Sprite full_heart;
     public Sprite empty_heart;
+    
 
     private bool flag;
     private bool Check_hurt = false;
@@ -51,6 +52,22 @@ public class Hero : MonoBehaviour
     
     void Start()
     {
+        int ind_scene = SceneManager.GetActiveScene().buildIndex;
+        string Posx = "PosX" + ind_scene;
+        string Posy = "PosY" + ind_scene;
+        string Posz = "PosZ" + ind_scene;
+        if (PlayerPrefs.HasKey(Posx) && PlayerPrefs.HasKey(Posy) && PlayerPrefs.HasKey(Posz))
+        {
+            float posx = PlayerPrefs.GetFloat(Posx);
+            float posy = PlayerPrefs.GetFloat(Posy);
+            float posz = PlayerPrefs.GetFloat(Posz);
+            transform.position = new Vector3(posx, posy, posz);
+            PlayerPrefs.DeleteKey(Posx);
+            PlayerPrefs.DeleteKey(Posy);
+            PlayerPrefs.DeleteKey(Posz);
+
+        }
+        
         game_over.enabled = false;
         Count_money.enabled = false;
         for(int i=0;i< hearts.Length; i++)
@@ -59,6 +76,7 @@ public class Hero : MonoBehaviour
             Hearts[i].enabled = false;
             Hearts_empty[i].enabled = false;
         }
+       
     }
  
 
@@ -80,7 +98,7 @@ public class Hero : MonoBehaviour
         {
             Jump();
         }
-        if (Check_hurt) Check_hurt = false;
+        
 
 
     }
@@ -115,6 +133,7 @@ public class Hero : MonoBehaviour
         isGround = Physics2D.OverlapCircle(CheckGround.position, 0.5f, Ground);
        
         if (!isGround && !Check_hurt) State = States.Jump;
+       
         
 
     }
@@ -151,7 +170,7 @@ public class Hero : MonoBehaviour
                 enemy_col = collision.collider;
                 Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, true);
                 Invoke("EnableCollision", 1f);
-
+                Invoke("For_animation_Die", 0.5f);
 
 
 
@@ -169,6 +188,7 @@ public class Hero : MonoBehaviour
             enemy_col = collision.collider;
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, true);
             Invoke("EnableCollision", 1f);
+            Invoke("For_animation_Die", 1f);
 
 
         }
@@ -192,6 +212,11 @@ public class Hero : MonoBehaviour
             Die_Win();
 
         }
+        if(collision.gameObject.tag == "disappear")
+        {
+            Destroy(collision.gameObject,0.3f);
+            
+        }
         
 
     }
@@ -199,6 +224,10 @@ public class Hero : MonoBehaviour
     {
         
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy_col, false);
+    }
+    private void For_animation_Die()
+    {
+        Check_hurt = false;
     }
     private void Hurt()
     {
@@ -243,13 +272,11 @@ public class Hero : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    public void Restart3()
+    public void Exit()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Level3");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
