@@ -23,6 +23,18 @@ public class Clicked : MonoBehaviour
             NextScene = Name;
         }
     }
+
+    public void Exit()
+    {
+        Vector3 pos = player.transform.position;
+        int ind_scene = SceneManager.GetActiveScene().buildIndex;
+        string Posx = "PosX"+ind_scene;
+        string Posy = "PosY" + ind_scene;
+        string Posz = "PosZ" + ind_scene;
+        PlayerPrefs.SetFloat(Posx, pos.x);
+        PlayerPrefs.SetFloat(Posy, pos.y);
+        PlayerPrefs.SetFloat(Posz, pos.z);
+    }
     
     private void LoadNextScene()
     {
@@ -40,15 +52,6 @@ public class Clicked : MonoBehaviour
 
     public void OpenMenu()
     {
-        Vector3 pos = player.transform.position;
-        int ind_scene = SceneManager.GetActiveScene().buildIndex;
-        string Posx = "PosX"+ind_scene;
-        string Posy = "PosY" + ind_scene;
-        string Posz = "PosZ" + ind_scene;
-        PlayerPrefs.SetFloat(Posx, pos.x);
-        PlayerPrefs.SetFloat(Posy, pos.y);
-        PlayerPrefs.SetFloat(Posz, pos.z);
-        Debug.Log(Posz);
         Sound.clip = OnClicked;
         Sound.Play();
         PausePanel.SetActive(true);
