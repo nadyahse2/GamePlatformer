@@ -239,7 +239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -937, y: -530}
+  m_AnchoredPosition: {x: -972, y: -540}
   m_SizeDelta: {x: 720, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &55358185
@@ -529,7 +529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.84, y: -6.475}
+  m_AnchoredPosition: {x: 49, y: -20}
   m_SizeDelta: {x: 411.68, y: 130.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &106440319
@@ -608,7 +608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: -11}
+  m_AnchoredPosition: {x: 35, y: -20}
   m_SizeDelta: {x: 396.04, y: 127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &182378352
@@ -841,7 +841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: -5}
+  m_AnchoredPosition: {x: 55, y: -20}
   m_SizeDelta: {x: 396.04, y: 127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &487171103
@@ -1287,7 +1287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 953, y: -447}
+  m_AnchoredPosition: {x: 976, y: -460}
   m_SizeDelta: {x: 720, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &628189256
@@ -1882,7 +1882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 953.00006, y: -607}
+  m_AnchoredPosition: {x: 976, y: -620}
   m_SizeDelta: {x: 720, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185086963
@@ -2010,6 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sound: {fileID: 1855611415}
   OnClicked: {fileID: 8300000, guid: 9b7b6b17dd1ae3047aac06b17eb87095, type: 3}
+  player: {fileID: 0}
   PausePanel: {fileID: 0}
 --- !u!4 &1340421640
 Transform:
@@ -2061,7 +2062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: -12}
+  m_AnchoredPosition: {x: 42, y: -20}
   m_SizeDelta: {x: 396.04, y: 127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1342828716
@@ -2293,7 +2294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 953.00006, y: -527}
+  m_AnchoredPosition: {x: 976, y: -540}
   m_SizeDelta: {x: 720, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1425524856
@@ -2427,7 +2428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -937, y: -610}
+  m_AnchoredPosition: {x: -972, y: -620}
   m_SizeDelta: {x: 720, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540864129
@@ -2555,7 +2556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SFX: {fileID: 973649018}
   Music: {fileID: 611680531}
-  Sound: {fileID: 8300000, guid: b448f96e07bfe4a45b88e4a9e88812cf, type: 3}
+  Sound: {fileID: 8300000, guid: 3fd170a01acff46f7953188baef6662f, type: 3}
   ClickButton: {fileID: 8300000, guid: 3f30d151666a558498615a125956e438, type: 3}
 --- !u!4 &1554544563
 Transform:
@@ -3045,7 +3046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -937, y: -450}
+  m_AnchoredPosition: {x: -972, y: -460.00003}
   m_SizeDelta: {x: 720, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128758343
