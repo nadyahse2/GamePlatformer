@@ -118,7 +118,7 @@ public class Clicked : MonoBehaviour
     }
     public void QuitGame()
     {
-         PlayerPrefs.DeleteAll();
+         //PlayerPrefs.DeleteAll();
          #if UNITY_EDITOR
                   UnityEditor.EditorApplication.isPlaying= false;
          #else 
