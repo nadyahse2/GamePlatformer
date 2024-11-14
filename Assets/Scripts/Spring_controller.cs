@@ -7,14 +7,16 @@ public class Spring_controller : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite_spring;
 
-    public Sprite spring1;
-    public Sprite spring2;
+    public Sprite spring1;// Спрайт пружины в начальном состоянии
+    public Sprite spring2;// Спрайт пружины после активации
 
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         sprite_spring = GetComponentInChildren<SpriteRenderer>();
     }
+
+    // Устанавливаем начальный спрайт пружины
     void Start()
     {
         sprite_spring.sprite = spring1;
@@ -25,6 +27,7 @@ public class Spring_controller : MonoBehaviour
     {
         
     }
+    // Проверяем, столкнулись ли с объектом героя  и если да, активируем пружину 
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -39,6 +42,7 @@ public class Spring_controller : MonoBehaviour
 
 
     }
+    // (функция для задержки) Добавляем импульс к объекту героя для прыжка
     void Delay()
     {
         Rigidbody2D rb = FindObjectOfType<Hero>().GetComponent<Rigidbody2D>();

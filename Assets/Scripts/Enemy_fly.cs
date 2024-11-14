@@ -26,6 +26,7 @@ public class Enemy_fly : MonoBehaviour
        
 
     }
+    //Запоминаем изначальную позицию, чтобы не улетать выше 
     void Start()
     {
         pos = transform.position;
@@ -44,7 +45,7 @@ public class Enemy_fly : MonoBehaviour
 
 
     }
-    
+    //Функции для типа зигзагообразного движения 
     void Move()
     {
         transform.Translate(Vector3.left * speed * Time.deltaTime * dir);
@@ -86,6 +87,7 @@ public class Enemy_fly : MonoBehaviour
             flag = false;
         }
     }
+    //проверяем наличие земли справа и слева 
     void ChekingGround()
     {
         if (left_move)

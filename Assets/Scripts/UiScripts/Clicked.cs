@@ -52,7 +52,7 @@ public class Clicked : MonoBehaviour
             NextScene = Name;
         }
     }
-
+    //Обработка выхода игрока без завершения уровня(сохранение данных игрока) 
     public void Exit()
     {
         Hero hero = player.GetComponent<Hero>();
@@ -63,9 +63,13 @@ public class Clicked : MonoBehaviour
             string Posx = "PosX" + ind_scene;
             string Posy = "PosY" + ind_scene;
             string Posz = "PosZ" + ind_scene;
+            string Coins = "coins" + ind_scene;
+            string liv = "hearts" + ind_scene;
             PlayerPrefs.SetFloat(Posx, pos.x);
             PlayerPrefs.SetFloat(Posy, pos.y);
             PlayerPrefs.SetFloat(Posz, pos.z);
+            PlayerPrefs.SetInt(liv, hero.lives);
+            PlayerPrefs.SetInt(Coins, hero.coins);
         }
         
     }

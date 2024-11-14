@@ -51,6 +51,8 @@ public class Enemy_patrule : MonoBehaviour
             }
         }
     }
+
+    //Проверка земли справа и слева 
     void ChekingGround()
     {
         if (left_move)
@@ -62,6 +64,7 @@ public class Enemy_patrule : MonoBehaviour
             Onground = (Physics2D.OverlapCircle(Checkground1.position, 0.5f, Ground));
         }
     }
+    //Гибель врага, функция используется 
     public void Hurt()
     {
         Destroy(gameObject);

@@ -6,6 +6,7 @@ public class CameraCon : MonoBehaviour
 {
     [SerializeField] private Transform player;
     private Vector3 pos;
+    // Находим угрока на сцене и запоминаем его позицию 
     private void Awake()
     {
         if (!player)
@@ -16,7 +17,7 @@ public class CameraCon : MonoBehaviour
         
     }
 
-    
+    //Перемещаем камеру к игроку 
     void Update()
     {
         Vector3 temp = transform.position;

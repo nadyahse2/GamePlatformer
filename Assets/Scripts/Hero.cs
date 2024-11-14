@@ -8,8 +8,8 @@ public class Hero : MonoBehaviour
 {
     private float speed = 5f;
     private float jump_force = 20f;
-    private int lives = 3;
-    private int coins = 0;
+    public int lives = 3;
+    public int coins = 0;
 
     private Rigidbody2D rd;
     private Animator anim;
@@ -27,8 +27,9 @@ public class Hero : MonoBehaviour
     public Sprite empty_heart;
     public AudioSource damage;
     public AudioSource coin;
-    private int[] mas = { 4, 8,10,12 };
-
+    // Массив для определения количества монет для победы
+    private int[] mas = { 4, 10,16,27 };
+    // Флаги состояния
     public bool Check_win;
     public bool Check_die;
     private bool flag;
@@ -56,33 +57,41 @@ public class Hero : MonoBehaviour
     
     void Start()
     {
+        // Получение данных о позиции, количестве монет и кол-ве жизний из сохранений(если пользователь вышел, не закончив уровень) 
         Check_win = false; 
         Check_die = false;
         int ind_scene = SceneManager.GetActiveScene().buildIndex;
         string Posx = "PosX" + ind_scene;
         string Posy = "PosY" + ind_scene;
         string Posz = "PosZ" + ind_scene;
+        string Coins = "coins" + ind_scene;
+        string liv = "hearts" + ind_scene;
         if (PlayerPrefs.HasKey(Posx) && PlayerPrefs.HasKey(Posy) && PlayerPrefs.HasKey(Posz))
         {
             float posx = PlayerPrefs.GetFloat(Posx);
             float posy = PlayerPrefs.GetFloat(Posy);
             float posz = PlayerPrefs.GetFloat(Posz);
             transform.position = new Vector3(posx, posy, posz);
+            coins = PlayerPrefs.GetInt(Coins);
+            lives = PlayerPrefs.GetInt(liv);
             PlayerPrefs.DeleteKey(Posx);
             PlayerPrefs.DeleteKey(Posy);
             PlayerPrefs.DeleteKey(Posz);
 
         }
-        
+        // Инициализация элементов интерфейса
         game_over.enabled = false;
         Count_money.enabled = false;
         for(int i=0;i< hearts.Length; i++)
         {
-            hearts[i].sprite = full_heart;
+
+            if(i < lives) { hearts[i].sprite = full_heart; }
+            else { hearts[i].sprite = empty_heart;}
             Hearts[i].enabled = false;
             Hearts_empty[i].enabled = false;
         }
-       
+        count_coins.text = coins.ToString();
+
     }
  
 
@@ -109,7 +118,7 @@ public class Hero : MonoBehaviour
     }
 
 
-
+    // Метод для движения
     void Move()
     {
         if (isGround && !Check_hurt) State = States.Run;
@@ -124,6 +133,8 @@ public class Hero : MonoBehaviour
             sprite.flipX = true;
         }
     }
+
+    // Метод для прыжка
     void Jump()
     {
 
@@ -132,7 +143,7 @@ public class Hero : MonoBehaviour
 
     }
 
-   
+    // Проверка земли под ногами 
     private void CheckingGround()
     {
         isGround = Physics2D.OverlapCircle(CheckGround.position, 0.5f, Ground);
@@ -142,7 +153,7 @@ public class Hero : MonoBehaviour
         
 
     }
-    
+    //Обработка столкновений с врагами, монетами, исчезающими блоками, флагом выхода, острыми блоками 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
@@ -238,6 +249,7 @@ public class Hero : MonoBehaviour
         
 
     }
+    // Функции для задержки проигрования анимации, звука и отсутствия коллайдера при столкновении с монстром 
     private void EnableCollision()
     {
         
@@ -251,6 +263,7 @@ public class Hero : MonoBehaviour
         damage.Stop();
         coin.Stop();
     }
+    //Обработка урона 
     private void Hurt()
     {
 
@@ -269,6 +282,7 @@ public class Hero : MonoBehaviour
         }
         
     }
+    // Для интерфейса конца игры 
     private void Die_Win()
     {
         Time.timeScale = 0;
@@ -291,7 +305,7 @@ public class Hero : MonoBehaviour
         
     }
     
-
+    //Для кнопок на меню конца игры 
     public void Restart()
     {
         Time.timeScale = 1;
