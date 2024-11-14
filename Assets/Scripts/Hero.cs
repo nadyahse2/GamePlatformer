@@ -26,6 +26,7 @@ public class Hero : MonoBehaviour
     public Sprite full_heart;
     public Sprite empty_heart;
     public AudioSource damage;
+    public AudioSource coin;
     private int[] mas = { 4, 8,10,12 };
 
     public bool Check_win;
@@ -103,7 +104,6 @@ public class Hero : MonoBehaviour
         {
             Jump();
         }
-        
 
 
     }
@@ -211,10 +211,11 @@ public class Hero : MonoBehaviour
         }
         if(collision.gameObject.tag == "coin")
         {
+            coin.Play();
             coins++;
             Destroy(collision.gameObject);
             count_coins.text = coins.ToString();
-
+            Invoke("StopSound", 0.4f);
         }
         if (collision.gameObject.tag == "exit")
         {
@@ -244,9 +245,11 @@ public class Hero : MonoBehaviour
         Check_hurt = false;
         Hurt();
     }
+
     private void StopSound()
     {
         damage.Stop();
+        coin.Stop();
     }
     private void Hurt()
     {
