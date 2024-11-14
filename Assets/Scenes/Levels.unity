@@ -2011,6 +2011,10 @@ MonoBehaviour:
   Sound: {fileID: 1855611415}
   OnClicked: {fileID: 8300000, guid: 9b7b6b17dd1ae3047aac06b17eb87095, type: 3}
   player: {fileID: 0}
+  l2: {fileID: 2128758343}
+  l3: {fileID: 1425524856}
+  l4: {fileID: 55358185}
+  l5: {fileID: 1185086963}
   PausePanel: {fileID: 0}
 --- !u!4 &1340421640
 Transform:

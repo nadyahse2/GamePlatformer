@@ -10,8 +10,37 @@ public class Clicked : MonoBehaviour
     private string NextScene;
     public GameObject player;
     int count_levels = 5;
+    public Button l2;
+    public Button l3;
+    public Button l4;
+    public Button l5;
 
-    
+    private void Start()
+    {
+        if (l2 != null) l2.interactable = false;
+        if (l3 != null) l3.interactable = false;
+        if (l4 != null) l4.interactable = false;
+        if (l5 != null) l5.interactable = false;
+
+
+        if (PlayerPrefs.GetInt("L0") == 1 )
+        {
+            if (l2 != null) l2.interactable = true;
+        }
+        if (PlayerPrefs.GetInt("L1") == 1)
+        {
+            if (l3 != null) l3.interactable = true;
+        }
+        if (PlayerPrefs.GetInt("L2") == 1)
+        {
+            if (l4 != null) l4.interactable = true;
+        }
+        if (PlayerPrefs.GetInt("L3") == 1)
+        {
+            if (l5 != null) l5.interactable = true;
+        }
+
+    }
     public void OnCliked(string Name)
     {
         Sound.clip = OnClicked;
@@ -26,14 +55,19 @@ public class Clicked : MonoBehaviour
 
     public void Exit()
     {
-        Vector3 pos = player.transform.position;
-        int ind_scene = SceneManager.GetActiveScene().buildIndex;
-        string Posx = "PosX"+ind_scene;
-        string Posy = "PosY" + ind_scene;
-        string Posz = "PosZ" + ind_scene;
-        PlayerPrefs.SetFloat(Posx, pos.x);
-        PlayerPrefs.SetFloat(Posy, pos.y);
-        PlayerPrefs.SetFloat(Posz, pos.z);
+        Hero hero = player.GetComponent<Hero>();
+        if(hero.Check_die == false && hero.Check_die == false)
+        {
+            Vector3 pos = player.transform.position;
+            int ind_scene = SceneManager.GetActiveScene().buildIndex;
+            string Posx = "PosX" + ind_scene;
+            string Posy = "PosY" + ind_scene;
+            string Posz = "PosZ" + ind_scene;
+            PlayerPrefs.SetFloat(Posx, pos.x);
+            PlayerPrefs.SetFloat(Posy, pos.y);
+            PlayerPrefs.SetFloat(Posz, pos.z);
+        }
+        
     }
     
     private void LoadNextScene()

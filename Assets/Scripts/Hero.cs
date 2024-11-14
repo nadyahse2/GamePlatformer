@@ -25,8 +25,11 @@ public class Hero : MonoBehaviour
     public Image[] hearts;
     public Sprite full_heart;
     public Sprite empty_heart;
-    
+    public AudioSource damage;
+    private int[] mas = { 4, 8,10,12 };
 
+    public bool Check_win;
+    public bool Check_die;
     private bool flag;
     private bool Check_hurt = false;
     private bool isGround;
@@ -52,6 +55,8 @@ public class Hero : MonoBehaviour
     
     void Start()
     {
+        Check_win = false; 
+        Check_die = false;
         int ind_scene = SceneManager.GetActiveScene().buildIndex;
         string Posx = "PosX" + ind_scene;
         string Posy = "PosY" + ind_scene;
@@ -166,16 +171,17 @@ public class Hero : MonoBehaviour
                 Check_hurt = true;
                 State = States.Die_1;
                 lives--;
-                Hurt();
                 enemy_col = collision.collider;
                 Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, true);
-                Invoke("EnableCollision", 1f);
-                Invoke("For_animation_Die", 0.5f);
-
-
-
+                damage.Play();
+                
+                Invoke("EnableCollision", 1.2f);
+                Invoke("StopSound", 0.2f);
+                
+                
 
             }
+            
             
 
         }
@@ -184,12 +190,15 @@ public class Hero : MonoBehaviour
             Check_hurt = true;
             State = States.Die_1;
             lives--;
-            Hurt();
             enemy_col = collision.collider;
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, true);
-            Invoke("EnableCollision", 1f);
-            Invoke("For_animation_Die", 1f);
-
+            
+            damage.Play();
+            Invoke("EnableCollision", 1.2f);
+            Invoke("StopSound", 0.2f);
+        
+            
+            
 
         }
 
@@ -209,6 +218,14 @@ public class Hero : MonoBehaviour
         }
         if (collision.gameObject.tag == "exit")
         {
+            Check_win = true;
+            int ind_l = SceneManager.GetActiveScene().buildIndex;
+            if(coins == mas[ind_l])
+            {
+                string lev = "L" + ind_l;
+                PlayerPrefs.SetInt(lev, 1);
+            }
+            
             Die_Win();
 
         }
@@ -224,16 +241,18 @@ public class Hero : MonoBehaviour
     {
         
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemy_col, false);
-    }
-    private void For_animation_Die()
-    {
         Check_hurt = false;
+        Hurt();
+    }
+    private void StopSound()
+    {
+        damage.Stop();
     }
     private void Hurt()
     {
-       
-       
-        hearts[lives].sprite = empty_heart;
+
+        if (lives > 0) { hearts[lives].sprite = empty_heart; }
+        
         
         if (lives == 0)
         {
@@ -242,6 +261,7 @@ public class Hero : MonoBehaviour
                 hearts[i].sprite = empty_heart;
             }
             coins = 0;
+            Check_die = true;
             Die_Win();
         }
         
@@ -276,6 +296,7 @@ public class Hero : MonoBehaviour
     }
     public void Exit()
     {
+
         SceneManager.LoadScene("MainMenu");
     }
 
