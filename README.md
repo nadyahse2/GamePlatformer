@@ -12,9 +12,9 @@
 
 ## Скриншоты
 
-![Скриншот игры 1](Images/screen#1.png)
-![Скриншот игры 2](Images/screen#2.png)
-![Скриншот игры 3](Images/screen#3.png)
+![Скриншот игры 1](Images/screen1.png)
+![Скриншот игры 2](Images/screen2.png)
+![Скриншот игры 3](Images/screen3.png)
 
 ## Особенности
 
