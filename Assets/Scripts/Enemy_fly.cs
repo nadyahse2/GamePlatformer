@@ -99,6 +99,10 @@ public class Enemy_fly : MonoBehaviour
             Onground = (Physics2D.OverlapCircle(Checkground1.position, 0.5f, Ground));
         }
     }
-    
+    public void Hurt_fly()
+    {
+        Destroy(gameObject);
+    }
+
 }
 

@@ -33,6 +33,7 @@ public class Hero : MonoBehaviour
     public bool Check_win;
     public bool Check_die;
     private bool flag;
+    private bool flag2;
     private bool Check_hurt = false;
     private bool isGround;
     private bool Oncollision= true;
@@ -198,15 +199,32 @@ public class Hero : MonoBehaviour
         }
         if(collision.gameObject.tag == "enemy")
         {
-            Check_hurt = true;
-            State = States.Die_1;
-            lives--;
-            enemy_col = collision.collider;
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, true);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, Oncollision);
+            Enemy_fly enemy = collision.collider.GetComponent<Enemy_fly>();
+            flag2 = false;
+            foreach (ContactPoint2D point in collision.contacts)
+            {
+                if (point.normal.y >= 0.9f)
+                {
+                    enemy.Hurt_fly();
+                    flag2 = true;
+
+                }
+
+            }
+            if (!flag2)
+            {
+                Check_hurt = true;
+                State = States.Die_1;
+                lives--;
+                enemy_col = collision.collider;
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider, true);
+
+                damage.Play();
+                Invoke("EnableCollision", 1.2f);
+                Invoke("StopSound", 0.2f);
+            }
             
-            damage.Play();
-            Invoke("EnableCollision", 1.2f);
-            Invoke("StopSound", 0.2f);
         
             
             
